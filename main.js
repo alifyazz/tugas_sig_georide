@@ -1,42 +1,27 @@
-// Import library dari croot.js.org
-import { map } from 'https://croot.js.org/croot.js';
+// 1. GANTI BARIS INI DENGAN SINTAKS IMPORT DARI WEB CROOT.JS.ORG
+import { map } from 'URL_YANG_ADA_DI_DOKUMENTASI_CROOT_JS'; 
 
-// 1. Inisialisasi Peta
-// Koordinat diset agar terpusat di area ULBI berdasarkan data koordinat [107.575657, -6.874506]
+// 2. Inisialisasi peta pada koordinat tujuan (ULBI)
 const myMap = map('map').setView([-6.874506, 107.575657], 16);
 
-// 2. Mengambil data file rute_kampus.geojson
-fetch('rute_kampus.geojson') //
+// 3. Mengambil dan menampilkan data rute_kampus.geojson
+fetch('rute_kampus.geojson')
     .then(response => response.json())
     .then(data => {
-        // 3. Render GeoJSON ke dalam Peta
-        // Fungsi croot untuk menampilkan polyline jalan dan polygon gedung
-        // Dokumentasikan bagian ini di artikel Medium menyesuaikan syntax croot.js
-        console.log("Data peta berhasil dimuat:", data);
-        
-        // Contoh implementasi (sesuaikan dengan croot):
-        // croot.geoJson(data).addTo(myMap);
+        // GANTI BARIS INI: Gunakan fungsi dari dokumentasi croot.js untuk memuat data JSON ke peta
+        console.log("Data peta dimuat:", data);
+        // croot.geoJson(data).addTo(myMap); <-- Sesuaikan dengan dokumentasi
     })
-    .catch(error => console.error('Gagal memuat data rute:', error));
+    .catch(error => console.error('Gagal memuat rute:', error));
 
-// 4. Logika Perhitungan Tarif Minimal 10 Ribu
+// 4. Logika tarif minimal 10.000
 function calculateFare(distanceInKm) {
-    let baseFare = 5000;
-    let perKmRate = 2000;
-    let total = baseFare + (distanceInKm * perKmRate);
-    
-    // Syarat wajib: Minimal ongkos 10 ribu
-    if (total < 10000) {
-        total = 10000;
-    }
-    return total;
+    let total = 5000 + (distanceInKm * 2000);
+    return total < 10000 ? 10000 : total; // Syarat mutlak dari dosen
 }
 
-// Menampilkan tarif di UI
-const finalFare = calculateFare(1.5); // Anggap jarak 1.5 km
-document.getElementById('fare-price').innerText = `Rp ${finalFare.toLocaleString('id-ID')}`;
+document.getElementById('fare-price').innerText = `Rp ${calculateFare(1.5).toLocaleString('id-ID')}`;
 
-// 5. Interaksi Tombol UI
 document.getElementById('btn-pesan').addEventListener('click', () => {
-    alert('Mencari driver di sekitar Pasar Cibogo untuk rute ke ULBI...');
+    alert('Mencari driver terdekat...');
 });
