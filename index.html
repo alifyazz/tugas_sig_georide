@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Peta Rute GeoRide</title>
+    <!-- Menghubungkan file CSS eksternal -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-header">
+        GeoRide
+    </div>
+
+    <!-- Container Peta -->
+    <div id="map"></div>
+
+    <!-- UI Bottom Sheet Pemesanan -->
+    <div class="bottom-sheet">
+        <div class="route-details">
+            <div class="route-connector"></div>
+            <div class="route-item">
+                <div class="icon-dot dot-start"></div>
+                <div class="route-text">
+                    <span class="route-label">Lokasi Jemput</span>
+                    <span class="route-value" id="pickup-location">Pasar Cibogo</span>
+                </div>
+            </div>
+            <div class="route-item">
+                <div class="icon-dot dot-end"></div>
+                <div class="route-text">
+                    <span class="route-label">Tujuan</span>
+                    <span class="route-value" id="dropoff-location">Universitas Logistik dan Bisnis Internasional</span>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="fare-container">
+            <span class="fare-label">Total Tarif</span>
+            <span class="fare-price" id="fare-price">Rp 0</span>
+        </div>
+
+        <button class="btn-order" id="btn-pesan">Pesan GeoRide Sekarang</button>
+    </div>
+
+    <!-- Menghubungkan file JavaScript sebagai module -->
+    <script type="module" src="main.js"></script>
+</body>
+</html>
